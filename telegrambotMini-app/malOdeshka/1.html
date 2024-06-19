@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<style>
+    * {
+        border-inline: None;
+        --tg-theme-text-color: black;
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        font-size: medium;
+        color: var(--tg-theme-text-color);
+    }
+    body {
+        --tg-theme-bg-color: rgb(255, 255, 255);
+        background-color: var(--tg-theme-bg-color);
+        margin:0px;
+        padding:10%;
+    }
+    .main {
+        text-align: center;
+    }
+    .rarter {
+        background-color: pink;
+        color: black;
+        border-color: black;
+        border-width: 5px;
+        border-style: solid;
+        border-radius: 20px;
+        width: 80%;
+        padding: 5px;
+    }
+    .main .submit{
+        background-color:lawngreen;
+    }
+    body .main input {
+        width: 75%;
+    }
+    body .main textarea {
+        width: 75%;
+    }
+
+</style>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Детская одежда</title>
+</head>
+<body>
+    <div class="main">
+        <h1 style="font-size: larger;">Выбрана тема:<u>Детская одежда</u></h1><hr>
+        Описание(Просим указать название, цвет, состояние; написать все кратко и понятно!):<br>
+        <textarea class="description rarter" cols="30" rows="10"></textarea>
+        <br><br><hr>
+        Одежда для девочки или мальчика<br>
+        <select class="Garder rarter">
+            <option value="boy"  >Мальчик </option>
+            <option value="girl" >Девочка </option>
+        </select>
+        <br><br><hr>
+        Выбирите для какого возраста подойдет одежда<br>
+        <select class="Age rarter">
+            <option value="m0-2"   >0-2 мес   </option>
+            <option value="m3-5"   >3-5 мес   </option>
+            <option value="m6-8"   >6-8 мес   </option>
+            <option value="m9-11"  >9-11 мес  </option>
+            <option value="y1-2"   >1-2 года  </option>
+            <option value="y3-4"   >3-4 года  </option>
+            <option value="y5-6"   >5-6 лет   </option>
+            <option value="y7-8"   >7-8 лет   </option>
+            <option value="y9-11"  >9-11 лет  </option>
+            <option value="y12-14" >12-14 лет </option>
+        </select>
+        <br><br><hr>
+        Сезон<br>
+        <select class="season rarter">
+            <option value="zima"  >Зима  </option>
+            <option value="vesna" >Весна </option>
+            <option value="leto"  >Лето  </option>
+            <option value="osen"  >Осень </option>
+        </select>
+        <br><br><hr>
+        Тип<br>
+        <select class="type rarter">
+            <option value="top"    >Верхняя      </option>
+            <option value="all"    >Повседневная </option>
+            <option value="cool"   >Нарядная     </option>
+            <option value="school" >Школьная     </option>
+            <option value="sport"  >Спортивная   </option>
+        </select>
+        <br><br><hr>
+        Материал<br>
+        <select class="material rarter">
+            <option value="xlopok"    >Хлопок    </option>
+            <option value="len"       >Лен       </option>
+            <option value="sherst"    >Шерсть    </option>
+            <option value="sintetika" >Синтетика </option>
+        </select>
+        <br><br><hr>
+        Размеры:<br>
+        Рост:<br>
+        <input class="rost rarter" type="number">,<br><br>
+        Объём груди/талии/бедер:<br>
+        <input class="obem rarter" type="number">
+        <br><br><hr>
+        Состояние:<br>
+        <select class="state rarter"><option value="new">Новая</option><option value="by">Б/У</option></select>
+        <br><br><hr>
+        <button class="submit rarter">Отправить</button>
+    </div>
+</body>
+</html>
