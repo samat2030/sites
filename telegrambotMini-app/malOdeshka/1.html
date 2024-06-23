@@ -101,12 +101,11 @@
         <br><br><hr>
         Состояние:<br>
         <select class="state rarter"><option value="new">Новая</option><option value="by">Б/У</option></select>
-        <br><br><hr>
-        <button class="submit rarter" onclick="submit">Отправить</button>
     </div>
 </body>
 <script>
-    function submit(e) {
+    let tg = window.Telegram.WebApp
+    function submit(get) {
         description = document.querySelector(".description").value
         garder = document.querySelector(".garder").value
         age = document.querySelector(".age").value
@@ -116,23 +115,78 @@
         rost = document.querySelector(".rost").value
         obem = document.querySelector(".obem").value
         state = document.querySelector(".state").value
-        if (description=="" && rost=='0' && 'obem==0'){
-            alert("Вы не до конца написали форму")
+        if(get){
+            return {
+                'description':description,
+                'garder':garder,
+                'age':age,
+                'season':season,
+                'type':type,
+                'material':material,
+                'rost':rost,
+                'obem':obem,
+                'state':state
+            }
+        } else {
+            if (description=="" && rost=='0' && 'obem==0'){
+                return false
+            }
+            return true
         }
-        else {
-            console.log([
-                description,
-                garder,
-                age,
-                season,
-                type,
-                material,
-                rost,
-                obem,
-                state
-            ]);
-        }
+        //if (description=="" && rost=='0' && 'obem==0'){
+        //    alert("Вы не до конца написали форму")
+        //}
+        //else {
+        //    console.log([
+        //        description,
+        //        garder,
+        //        age,
+        //        season,
+        //        type,
+        //        material,
+        //        rost,
+        //        obem,
+        //        state
+        //    ]);
+        //}
     }
-    document.querySelector(".submit").onClick = submit
+    function callback() {
+        photos = window
+            .location
+            .search
+            .replace('?','')
+            .split('&')
+            .reduce(
+                function(p,e){
+                    var a = e.split('=')
+                    p[ decodeURIComponent(a[0])] = decodeURIComponent(a[1])
+                    return p
+                },
+                {}
+            )
+        r = submit(true)
+        r['photo1'] = photos["photo1"]
+        r['photo2'] = photos["photo2"]
+        r['photo3'] = photos["photo3"]
+        r['photo4'] = photos["photo4"]
+        r['photo5'] = photos["photo5"]
+        tg.sendData(JSON.stringify(r))
+
+    }
+    function n1() {
+        if (submit(false)) {
+            tg.MainButton.show()
+            tg.MainButton.color = "pink"
+            tg.MainButton.textColor = "black"
+            tg.onEvent('mainButtonClicked', callback)
+        } else {
+            tg.MainButton.hide()
+        }
+        n2()
+    }
+    function n2() {
+        setTimeout(n1(), 500)
+    }
+    n2()
 </script>
 </html>
