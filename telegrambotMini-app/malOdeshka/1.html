@@ -95,9 +95,9 @@
         <br><br><hr>
         Размеры:<br>
         Рост:<br>
-        <input class="rost rarter" type="number">,<br><br>
+        <input class="rost rarter" type="number" value="0">,<br><br>
         Объём груди/талии/бедер:<br>
-        <input class="obem rarter" type="number">
+        <input class="obem rarter" type="number" value="0">
         <br><br><hr>
         Состояние:<br>
         <select class="state rarter"><option value="new">Новая</option><option value="by">Б/У</option></select>
@@ -106,9 +106,12 @@
     </div>
 </body>
 <script>
-    function submit(params) {
-        
+    function submit() {
+        description = document.querySelector(".description")
+        if (description==""){
+            alert("Вы не до конца написали форму")
+        }
     }
-    document.querySelector(".submit").onClick = function(submit)
+    document.querySelector(".submit").onClick = submit()
 </script>
 </html>
