@@ -101,6 +101,8 @@
         <br><br><hr>
         Состояние:<br>
         <select class="state rarter"><option value="new">Новая</option><option value="by">Б/У</option></select>
+        <br><br><hr>
+        <button class="submit rarter">Отправить</button>
     </div>
 </body>
 <script>
@@ -171,22 +173,7 @@
         r['p4'] = photos["p4"]
         r['p5'] = photos["p5"]
         tg.sendData(JSON.stringify(r))
-
     }
-    function n1() {
-        if (submit(false)) {
-            tg.MainButton.show()
-            tg.MainButton.color = "pink"
-            tg.MainButton.textColor = "black"
-            tg.onEvent('mainButtonClicked', callback)
-        } else {
-            tg.MainButton.hide()
-        }
-        n2()
-    }
-    function n2() {
-        setTimeout(n1(), 500)
-    }
-    n2()
+    document.querySelector(".submit").addEventListener("click", callback)
 </script>
 </html>
