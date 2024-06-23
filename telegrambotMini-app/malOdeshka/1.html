@@ -49,13 +49,13 @@
         <textarea class="description rarter" cols="30" rows="10"></textarea>
         <br><br><hr>
         Одежда для девочки или мальчика<br>
-        <select class="Garder rarter">
+        <select class="garder rarter">
             <option value="boy"  >Мальчик </option>
             <option value="girl" >Девочка </option>
         </select>
         <br><br><hr>
         Выбирите для какого возраста подойдет одежда<br>
-        <select class="Age rarter">
+        <select class="age rarter">
             <option value="m0-2"   >0-2 мес   </option>
             <option value="m3-5"   >3-5 мес   </option>
             <option value="m6-8"   >6-8 мес   </option>
@@ -102,16 +102,36 @@
         Состояние:<br>
         <select class="state rarter"><option value="new">Новая</option><option value="by">Б/У</option></select>
         <br><br><hr>
-        <button class="submit rarter">Отправить</button>
+        <button class="submit rarter" onclick="submit">Отправить</button>
     </div>
 </body>
 <script>
     function submit() {
-        description = document.querySelector(".description")
-        if (description==""){
+        description = document.querySelector(".description").value
+        garder = document.querySelector(".garder").value
+        age = document.querySelector(".age").value
+        season = document.querySelector(".season").value
+        type = document.querySelector(".type").value
+        material = document.querySelector(".material").value
+        rost = document.querySelector(".rost").value
+        obem = document.querySelector(".obem").value
+        state = document.querySelector(".").value
+        if (description==""||rost==0||obem==0){
             alert("Вы не до конца написали форму")
         }
+        else {
+            console.log([
+                description,
+                garder,
+                age,
+                season,
+                type,
+                material,
+                rost,
+                obem,
+                state
+            ]);
+        }
     }
-    document.querySelector(".submit").onClick = submit()
 </script>
 </html>
