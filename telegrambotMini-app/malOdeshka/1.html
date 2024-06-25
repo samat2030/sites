@@ -181,25 +181,6 @@
     }
     function callback() {
         if (submit(false)){
-            photos = window
-                .location
-                .search
-                .replace('?','')
-                .split('&')
-                .reduce(
-                    function(p,e){
-                        var a = e.split('=')
-                        p[ decodeURIComponent(a[0])] = decodeURIComponent(a[1])
-                        return p
-                    },
-                    {}
-                )
-            r = submit(true)
-            r['p1'] = photos["p1"]
-            r['p2'] = photos["p2"]
-            r['p3'] = photos["p3"]
-            r['p4'] = photos["p4"]
-            r['p5'] = photos["p5"]
             tg.sendData(JSON.stringify(r))
         } else {
             alert("Вы не до конца написали форму")
