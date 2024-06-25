@@ -181,7 +181,7 @@
     }
     function callback() {
         if (submit(false)){
-            tg.sendData(JSON.stringify(r))
+            tg.sendData(JSON.stringify(submit(true)))
         } else {
             alert("Вы не до конца написали форму")
         }
