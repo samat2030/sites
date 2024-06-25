@@ -25,7 +25,7 @@
         width: 80%;
         padding: 5px;
     }
-    .main .choosetypesell {
+    .main .choosetype {
         text-align: left;
     }
     .main .submit{
@@ -105,11 +105,13 @@
         Состояние:<br>
         <select class="state rarter"><option value="new">Новая</option><option value="by">Б/У</option></select>
         <br><br><hr>
+        <div class="choosetype">
         Выбирете:<br>
         <input type="radio" name="free" class="choosetypesell">Даром<br>
         <input type="radio" name="barter" class="choosetypesell">Бартер(т.е. обмен)<br>
         <input type="radio" name="price" class="choosetypesell">Цена<br>
         <input type="text" class="rarter price">
+        </div>
         <br><br><hr>
         <button class="submit rarter">Отправить</button>
     </div>
