@@ -170,9 +170,9 @@
     }
     function choosetype() {
         if (document.querySelector('input[name="choosetypesell"]:checked').value == 'price') {
-            document.querySelector(".price").classList.add("hide")
+            document.querySelector(".price").className = "rarter price"
         } else {
-            document.querySelector(".price").classList.remove("hide")
+            document.querySelector(".price").className = "rarter price hide"
         }
     }
     function callback() {
