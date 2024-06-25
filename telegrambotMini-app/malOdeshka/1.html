@@ -132,8 +132,9 @@
         obem = document.querySelector(".obem").value
         state = document.querySelector(".state").value
         choosetype = document.querySelector('input[name="choosetypesell"]:checked').value
+        price = document.querySelector(".price")
         if(get){
-            return {
+            r = {
                 'description':description,
                 'garder':garder,
                 'age':age,
@@ -143,8 +144,11 @@
                 'rost':rost,
                 'obem':obem,
                 'state':state,
+                'chooosetype':choosetype,
                 'topic':'1'
             }
+            if (choosetype=="price") {r["price"]=price}
+            return r
         } else {
             if (description=="" && rost=='0' && 'obem==0'){
                 return false
