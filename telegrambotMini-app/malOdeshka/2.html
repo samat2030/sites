@@ -131,6 +131,9 @@
 </body>
 <script>
     let tg = window.Telegram.WebApp
+    function checked(selector) {
+        if(document.querySelector(selector).checked){return "1"}else{return "0"}
+    }
     function submit(get) {
         description = document.querySelector(".description").value
         garder = document.querySelector(".garder").value
@@ -138,7 +141,14 @@
         season = document.querySelector(".season").value
         type = document.querySelector(".type").value
         material = document.querySelector(".material").value
-        rost = document.querySelector(".rost").value
+        razmer = document.querySelector(".razmer").value
+        gibkaa = checked(".gibkaa")
+        shnyrki = checked(".shnyrki")
+        molnii = checked(".molnii")
+        lipychki = checked(".lipychki")
+        amortizachiaa = checked(".amortizachiaa")
+        podchivetka = checked(".podchivetka")
+        koleecikami = checked(".koleecikami")
         state = document.querySelector(".state").value
         choosetype = document.querySelector('input[name="choosetypesell"]:checked').value
         price = document.querySelector(".price").value
@@ -150,10 +160,16 @@
                 'season':season,
                 'type':type,
                 'material':material,
-                'rost':rost,
-                'obem':obem,
+                'razmer':razmer,
                 'state':state,
-                'choosetype':choosetype
+                'choosetype':choosetype,
+                "gibkaa":gibkaa,
+                "shnyrki":shnyrk,
+                "molnii":molnii,
+                "lipychki":lipychki,
+                "amortizachiaa":amortizachiaa,
+                "podchivetka":podchivetka,
+                "koleecikami":koleecikami
             }
             if (choosetype=="price") {r["price"]=price}
             return r
