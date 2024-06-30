@@ -76,10 +76,11 @@
         <br><br><hr>
         Сезон<br>
         <select class="season rarter">
-            <option value="zima"  >Зима  </option>
-            <option value="vesna" >Весна </option>
-            <option value="leto"  >Лето  </option>
-            <option value="osen"  >Осень </option>
+            <option value="zima"  >Зима       </option>
+            <option value="vesna" >Весна      </option>
+            <option value="leto"  >Лето       </option>
+            <option value="osen"  >Осень      </option>
+            <option value="seall" >Всесезоный </option>
         </select>
         <br><br><hr>
         Тип<br>
@@ -99,11 +100,8 @@
             <option value="sintetika" >Синтетика </option>
         </select>
         <br><br><hr>
-        Размеры:<br>
         Рост:<br>
-        <input class="rost rarter" type="number" value="0">,<br><br>
-        Объём груди/талии/бедер:<br>
-        <input class="obem rarter" type="number" value="0">
+        <input class="rost rarter" type="number" value="">
         <br><br><hr>
         Состояние:<br>
         <select class="state rarter"><option value="new">Новая</option><option value="by">Б/У</option></select>
@@ -129,7 +127,6 @@
         type = document.querySelector(".type").value
         material = document.querySelector(".material").value
         rost = document.querySelector(".rost").value
-        obem = document.querySelector(".obem").value
         state = document.querySelector(".state").value
         choosetype = document.querySelector('input[name="choosetypesell"]:checked').value
         price = document.querySelector(".price").value
@@ -149,7 +146,7 @@
             if (choosetype=="price") {r["price"]=price}
             return r
         } else {
-            if (description=="" && rost=='0' && 'obem==0'){
+            if (description=="" && rost=='' && obem==''){
                 return false
             }
             return true
