@@ -45,21 +45,21 @@
     <meta charset="UTF-8">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Детская одежда</title>
+    <title>Детская обувь</title>
 </head>
 <body>
     <div class="main">
-        <h1 style="font-size: larger;">Выбрана тема:<u>Детская одежда</u></h1><hr>
+        <h1 style="font-size: larger;">Выбрана тема:<u>Детская обувь</u></h1><hr>
         Описание(Просим указать название, цвет, состояние; написать все кратко и понятно!):<br>
         <textarea class="description rarter" cols="30" rows="10"></textarea>
         <br><br><hr>
-        Одежда для девочки или мальчика<br>
+        Обувь для девочки или мальчика<br>
         <select class="garder rarter">
             <option value="boy"  >Мальчик </option>
             <option value="girl" >Девочка </option>
         </select>
         <br><br><hr>
-        Выбирите для какого возраста подойдет одежда<br>
+        Выбирите для какого возраста подойдет обувь<br>
         <select class="age rarter">
             <option value="m0-2"   >0-2 мес   </option>
             <option value="m3-5"   >3-5 мес   </option>
@@ -93,14 +93,24 @@
         <br><br><hr>
         Материал<br>
         <select class="material rarter">
-            <option value="xlopok"    >Хлопок    </option>
-            <option value="len"       >Лен       </option>
-            <option value="sherst"    >Шерсть    </option>
-            <option value="sintetika" >Синтетика </option>
+            <option value="naterial" >Натуральная кожа </option>
+            <option value="zamsha"   >Замша            </option>
+            <option value="tekstil"  >Текстиль         </option>
         </select>
         <br><br><hr>
-        Рост:<br>
-        <input class="rost rarter" type="number" value="">
+        Размер:<br>
+        <input class="razmer rarter" type="number" value="">
+        <br><br><hr>
+        Особенности<br>
+        <div class="peculiar">
+            <p><input type="checkbox" class="">Гибкая нескользящая подошва</p><br>
+            <p><input type="checkbox" class="">Шнурки</p><br>
+            <p><input type="checkbox" class="">Молнии</p><br>
+            <p><input type="checkbox" class="">Липучки</p><br>
+            <p><input type="checkbox" class="">Амортизация</p><br>
+            <p><input type="checkbox" class=""></p><br>
+            <p><input type="checkbox" class=""></p><br>
+        </div>
         <br><br><hr>
         Состояние:<br>
         <select class="state rarter"><option value="new">Новая</option><option value="by">Б/У</option></select>
