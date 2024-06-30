@@ -131,8 +131,18 @@
 </body>
 <script>
     let tg = window.Telegram.WebApp
-    function checked(selector) {
-        if(document.querySelector(selector).checked){return "1"}else{return "0"}
+    function c(selector) {
+        return querySelector(selector).checked
+    }
+    function checked(p0,p1,p2,p3,p4,p5,p6) {
+        rt = ""
+        if(p0){rt+="#Гибкая_Нескользящая_Подошва "}
+        if(p1){rt+="#Шнурки "}
+        if(p2){rt+="#Молнии "}
+        if(p3){rt+="#Липучки "}
+        if(p4){rt+="#Амортизация "}
+        if(p5){rt+="#С_подцветкой "}
+        if(p6){rt+="#С_колёсиками "}
     }
     function submit(get) {
         description = document.querySelector(".description").value
@@ -142,13 +152,15 @@
         type = document.querySelector(".type").value
         material = document.querySelector(".material").value
         razmer = document.querySelector(".razmer").value
-        gibkaa = checked(".gibkaa")
-        shnyrki = checked(".shnyrki")
-        molnii = checked(".molnii")
-        lipychki = checked(".lipychki")
-        amortizachiaa = checked(".amortizachiaa")
-        podchivetka = checked(".podchivetka")
-        koleecikami = checked(".koleecikami")
+        peculiar = checked(
+            (".gibkaa"),
+            c(".shnyrki"),
+            c(".molnii"),
+            c(".lipychki"),
+            c(".amortizachiaa"),
+            c(".podchivetka"),
+            c(".koleecikami")
+        )
         state = document.querySelector(".state").value
         choosetype = document.querySelector('input[name="choosetypesell"]:checked').value
         price = document.querySelector(".price").value
