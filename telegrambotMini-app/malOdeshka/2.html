@@ -143,6 +143,7 @@
         if(p4){rt+="#Амортизация "}
         if(p5){rt+="#С_подцветкой "}
         if(p6){rt+="#С_колёсиками "}
+        return rt
     }
     function submit(get) {
         description = document.querySelector(".description").value
@@ -161,6 +162,7 @@
             c(".podchivetka"),
             c(".koleecikami")
         )
+        console.log(peculiar)
         state = document.querySelector(".state").value
         choosetype = document.querySelector('input[name="choosetypesell"]:checked').value
         price = document.querySelector(".price").value
@@ -178,6 +180,7 @@
                 'choosetype':choosetype,
             }
             if (choosetype=="price") {r["price"]=price}
+            console.log(r)
             return r
         } else {
             if (description=="" && rost==''){
