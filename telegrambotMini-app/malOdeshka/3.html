@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ru">
+<style>
+    * {
+        border-inline: None;
+        font-size: medium;
+        color: var(--tg-theme-text-color);
+    }
+    body {
+        background-color: var(--tg-theme-bg-color);
+        margin:0px;
+        padding:10%;
+    }
+    .main {
+        text-align: center;
+    }
+    .rarter {
+        background-color: pink;
+        color: black;
+        border-color: black;
+        border-width: 5px;
+        border-style: solid;
+        border-radius: 20px;
+        width: 80%;
+        padding: 5px;
+    }
+    .main .choosetype {
+        text-align: left;
+    }
+    .main .submit{
+        background-color:lawngreen;
+    }
+    body .main [type="text"] {
+        width: 75%;
+    }
+    body .main textarea {
+        width: 75%;
+    }
+    .hide {
+        display: none;
+    }
+    select option {
+        color: black;
+    }
+
+</style>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Женская одежда</title>
+</head>
+<body>
+    <div class="main">
+        <h1 style="font-size: larger;">Выбрана тема:<u>Женская одежда</u></h1><hr>
+        Описание(Просим указать название, цвет, состояние; написать все кратко и понятно!):<br>
+        <textarea class="description rarter" cols="30" rows="10"></textarea>
+        <br><br><hr>
+        Сезон<br>
+        <select class="season rarter">
+            <option value="zima"  >Зима       </option>
+            <option value="vesna" >Весна      </option>
+            <option value="leto"  >Лето       </option>
+            <option value="osen"  >Осень      </option>
+            <option value="seall" >Всесезоный </option>
+        </select>
+        <br><br><hr>
+        Тип<br>
+        <select class="type rarter">
+            <option value="top"    >Верхняя      </option>
+            <option value="all"    >Повседневная </option>
+            <option value="cool"   >Нарядная     </option>
+            <option value="school" >Школьная     </option>
+            <option value="sport"  >Спортивная   </option>
+        </select>
+        <br><br><hr>
+        Материал<br>
+        <select class="material rarter">
+            <option value="xlopok"    >Хлопок    </option>
+            <option value="len"       >Лен       </option>
+            <option value="sherst"    >Шерсть    </option>
+            <option value="sintetika" >Синтетика </option>
+        </select>
+        <br><br><hr>
+        Рост:<br>
+        <input class="rost rarter" type="number" value="">
+        <br><br><hr>
+        Стиль<br>
+        <select class="style rarter">
+            <option value="casual" >Casual     </option>
+            <option value="office" >Офисный    </option>
+            <option value="night"  >Вечерний   </option>
+            <option value="sport"  >Спортивный </option>
+        </select>
+        <br><br><hr>
+        Особенности<br>
+        <div class="peculiar">
+            <p><input type="checkbox" class="trends"  >Актуальные тренды </p>
+            <p><input type="checkbox" class="komfort" >Комфортный крой   </p>
+            <p><input type="checkbox" class="univers" >Универсальность   </p>
+            <p><input type="checkbox" class="poshih"  >Качество пошива   </p>
+        </div>
+        <br><br><hr>
+        Состояние:<br>
+        <select class="state rarter"><option value="new">Новая</option><option value="by">Б/У</option></select>
+        <br><br><hr>
+        Выбирете:<br>
+        <div class="choosetype">
+            <p><input type="radio" name="choosetypesell" value="free"           >Даром             <br></p>
+            <p><input type="radio" name="choosetypesell" value="barter" checked >Бартер(т.е. обмен)<br></p>
+            <p><input type="radio" name="choosetypesell" value="price"          >Цена              <br></p>
+        </div>
+        <input type="number" class="rarter price hide">
+        <br><br><hr>
+        <button class="submit rarter">Отправить</button>
+    </div>
+</body>
+<script>
+    let tg = window.Telegram.WebApp
+    function c(selector) {
+        return document.querySelector(selector).checked
+    }
+    function checked(p0,p1,p2,p3) {
+        rt = ""
+        if(p0){rt+="#Актуальные тренды "  }
+        if(p1){rt+="#Комфортный крой "    }
+        if(p2){rt+="#Универсальность "    }
+        if(p3){rt+="#Качество пошива "    }
+        return rt
+    }
+    function submit(get) {
+        description = document.querySelector(".description").value
+        season = document.querySelector(".season").value
+        material = document.querySelector(".material").value
+        rost = document.querySelector(".rost").value
+        style = document.querySelector(".style").value
+        peculiar = checked(
+            c(".trends" ),
+            c(".komfort"),
+            c(".univers"),
+            c(".poshih" )
+        )
+        state = document.querySelector(".state").value
+        choosetype = document.querySelector('input[name="choosetypesell"]:checked').value
+        price = document.querySelector(".price").value
+        if(get){
+            r = {
+                'description':description,
+                'season':season,
+                'material':material,
+                'rost':rost,
+                'style':style,
+                'peculiar':peculiar,
+                'state':state,
+                'choosetype':choosetype
+            }
+            if (choosetype=="price") {r["price"]=price}
+            return r
+        } else {
+            if (description=="" && rost==''){
+                return false
+            }
+            return true
+        }
+        //if (description=="" && rost=='0' && 'obem==0'){
+        //    alert("Вы не до конца написали форму")
+        //}
+        //else {
+        //    console.log([
+        //        description,
+        //        garder,
+        //        age,
+        //        season,
+        //        type,
+        //        material,
+        //        rost,
+        //        obem,
+        //        state
+        //    ]);
+        //}
+    }
+    function choosetype() {
+        if (document.querySelector('input[name="choosetypesell"]:checked').value == 'price') {
+            document.querySelector(".price").className = "rarter price"
+        } else {
+            document.querySelector(".price").className = "rarter price hide"
+        }
+    }
+    function callback() {
+        if (submit(false)){
+            tg.sendData(JSON.stringify(submit(true)))
+        } else {
+            alert("Вы не до конца написали форму")
+        }
+    }
+    document.querySelector(".submit").addEventListener("click", callback)
+    document.querySelector("input[value=\"free\"]").addEventListener("change", choosetype)
+    document.querySelector("input[value=\"barter\"]").addEventListener("change", choosetype)
+    document.querySelector("input[value=\"price\"]").addEventListener("change", choosetype)
+</script>
+</html>
