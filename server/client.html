@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ESP8266 Client</title>
+<style>
+  html {
+    height: 100%;
+  }
+  *{
+    background: #00000000;
+    color:white
+  }
+  body {
+    background: #186280;
+    background: linear-gradient(135deg, rgba(24, 98, 128, 1) 0%, rgba(87, 199, 133, 1) 100%);
+    font-family: Arial, sans-serif;
+    margin: 1rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  h1 {
+    text-align: center;
+    color: lightblue;
+  }
+  .status{
+    font-weight: bold;
+    color: orange;
+  }
+  table {
+    border-width: 3px;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 0px;
+    border-collapse: collapse;
+    border-color: #26c36f00;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+  th, td {
+    border-width: 2px;
+    border-style: solid;
+    margin: 0px;
+    padding: 5px;
+  }
+  .save{
+    width: 100%;
+    border-radius: 5px;
+    background-color: greenyellow;
+    color: black;
+    border-color: greenyellow;
+    border-style: solid;
+  }
+  .btntable{
+    border-radius: 5px;
+    background-color: greenyellow;
+    color: black;
+    border-color: greenyellow;
+    border-style: solid;
+  }
+  input{
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 2px;
+    padding-top:     0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 2px;
+    border-top-width:     0px;
+    border-color: greenyellow;
+    border-style: solid;
+    width: 100%;
+  }
+  input:focus{
+    outline: none;
+  }
+  .warning{
+    background-color: #ffa50055;
+  }
+  @media (max-width: 480px) {
+    body {
+      margin: 0.5rem;
+    }
+  }
+</style>
+</head>
+<body>
+  <h1>Панель для сервера server.seror.netcraze.pro</h1>
+  <div class="status">Соединение: подключение...</div>
+  <br>
+  <table>
+    <thead>
+      <tr>
+        <th>ИМЯ <button class="btntable" onclick="addname()">+</button></th>
+        <th>ЗНАЧЕНИЕ</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table><br><br>
+  <button class="save" onclick="save_()">Сохранить</button>
+<script>
+  const status = document.querySelector(".status  ")
+  const table  = document.querySelector(" table   ")
+  const save   = document.querySelector(".save    ")
+  const tbody  = document.querySelector(" tbody   ")
+  const baseUrl = 'https://server.seror.netcraze.pro';
+  let lastData = {}
+  let keys = []
+  let newData = {}
+  async function get(path){
+    try {
+      const resp = await fetch(baseUrl + "/" + path, {
+        method: 'GET',
+        cache: 'no-store'  // чтобы не получить закэшированный ответ
+      });
+      const text = await resp.text();
+      if (resp.status==200){
+        status.innerHTML = "Соединение: Успешно"
+        status.style.color="greenyellow"
+        return text
+      }
+      if (!resp.ok){
+        console.error(resp.status)
+        status.innerHTML = "Соединение: Не удалось"
+        status.style.color="red"
+        save.remove()
+        table.remove()
+      }
+    } catch (e) {
+      console.error(e)
+      status.innerHTML = "Соединение: Не удалось"
+      status.style.color="red"
+      save.remove()
+      table.remove()
+      return
+    }
+  }
+  async function setLastData() {
+    keys = await get("keys")
+    keys = keys.split(",")
+    for (let key of keys){
+      data = await get("get?name="+key)
+      lastData[key]=data
+    }
+    for (let key of Object.keys(lastData)){
+      newData[key] = lastData[key]
+    }
+    updateForNewData()
+  }
+  function updateForNewData() {
+    tbody.innerHTML=""
+    for (let key of Object.keys(newData)){
+      data=newData[key]
+      tr = document.createElement("tr")
+      tbody.appendChild(tr)
+      tdname = document.createElement("td")
+      tddata = document.createElement("td")
+      tr.appendChild(tdname)
+      tr.appendChild(tddata)
+      tdname.innerHTML = key+" "+'<button class="btntable '+key+'" onclick="delName(\''+key+'\')">-</button>'
+      tddata.innerHTML = '<input type="text" class="'+key+'" value="'+data+'">'
+    }
+  }
+  function c(obj1, obj2) {
+    const result = [];
+
+    for (const key of Object.keys(obj2)) {
+      if (!(key in obj1)) {
+        result.push(key);
+      }
+    }
+
+    return result;
+  }
+  function foundConflig(){
+    for (name1 of document.querySelectorAll("td")) {
+      name1.className=""
+    }
+    for (name2 of c(lastData, newData)) {
+      for (nname1 of document.querySelectorAll("."+name2)){
+        nname1.closest('td').className="warning"
+      }
+    }
+    for (name3 of document.querySelectorAll("input")) {
+      newData[name3.className]=name3.value
+      if (name3.value!=lastData[name3.className]) {
+        name3.closest('td').className="warning"
+      }
+    }
+  }
+  function save_() {
+    get("alldelete")
+    for (keyy of Object.keys(newData)) {
+      get("set?name="+keyy+"&data="+newData[keyy])
+    }
+    document.location.reload()
+  }
+  function delName(name) {
+    delete newData[name]; updateForNewData();
+  }
+  function addname() {
+    newData[prompt("Имя у новой строки")]=""; updateForNewData();
+  }
+  setInterval(foundConflig, 1000*1)
+  window.onload = async () => {
+    await get("")
+    await setLastData()
+  };
+</script>
+</body>
+</html>
